@@ -46,6 +46,7 @@ public class TreeWithNode {
 		this.root = null;
 	}
 
+	// O(1)
 	public void add(Integer value) {
 		if (isEmpty()) {
 			this.root = new TreeNode(value);
@@ -112,12 +113,13 @@ public class TreeWithNode {
 		return (isEmpty()) ? null : root.getHeight(0);
 	}
 
-	// O(h) siendo n la cantidad total de nodos
+	// O(h) siendo n la altura del arbol
 	// en el peor de los casos es un arbol enredadera
 	public Integer getMaxElem() {
 		return (isEmpty()) ? null : this.getMaxElem(root);
 	}
 
+	// O(h)
 	private Integer getMaxElem(TreeNode cursor) {
 		return (cursor.hasRight()) ? getMaxElem(cursor.getRight()) : cursor.getValue();
 	}
@@ -186,7 +188,7 @@ public class TreeWithNode {
 	}
 
 	/**
-	 * Dirigir el borrado hacia la izquierda del cursor
+	 * Dirigir el borrado hacia la izquierda del arbol
 	 * 
 	 * @param cursor nodo actual
 	 * @param e      elemento a borrar
@@ -208,7 +210,7 @@ public class TreeWithNode {
 	}
 
 	/**
-	 * Dirigir el borrado hacia la derecha del cursor
+	 * Dirigir el borrado hacia la derecha del arbol
 	 * 
 	 * @param cursor nodo actual
 	 * @param e      elemento a borrar

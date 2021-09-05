@@ -139,8 +139,11 @@ public class TreeNode {
 	 * @return lista de elementos de la rama mas grande
 	 */
 	public ArrayList<Integer> getLongestBranch() {
+		
 		ArrayList<Integer> listL = new ArrayList<Integer>();
 		ArrayList<Integer> listR = new ArrayList<Integer>();
+		
+		
 		listL.add(value);
 		listR.add(value);
 		
