@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import ejercicioEntregable.Libro;
+import ejercicioEntregable.modelo.Libro;
 
 public class CSVReaderLibros {
 
@@ -20,7 +20,7 @@ public class CSVReaderLibros {
 		ArrayList<String[]> lines = this.readContent();
 		ArrayList<Libro> libros = new ArrayList<Libro>();
 		for (String[] line : lines) {
-			Integer idLibro = Integer.parseInt(line[4].trim());
+			Integer idLibro = Integer.parseInt(line[0].trim());
 			String titulo = line[1].trim();
 			String autor = line[2].trim();
 			String genero = line[3].trim();

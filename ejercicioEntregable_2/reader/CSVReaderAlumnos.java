@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import ejercicioEntregable.Alumno;
+import ejercicioEntregable.modelo.Alumno;
 
 public class CSVReaderAlumnos {
 
