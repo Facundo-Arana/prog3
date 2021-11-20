@@ -6,13 +6,12 @@ import java.util.*;
 public class Greedy {
 
 	// contador de iteraciones el alumnos y libros
-	private int cA;
-	private int cL;
+	private int c;
 	private float nota;
 
 	public Greedy() {
-		cA = 0;
-		cL = 0;
+		c = 0;
+
 	}
 
 	/**
@@ -21,7 +20,7 @@ public class Greedy {
 	 * @param biblioteca : aporta la lista de libros
 	 * @param asignatura : aporta la lista de alumnos y la condicion de aprobacion
 	 */
-	public Solucion asignarLibros(Biblioteca biblioteca, Asignatura asignatura) {
+	public Estado asignarLibros(Biblioteca biblioteca, Asignatura asignatura) {
 		ArrayList<Libro> libros = biblioteca.getLibros();
 		ArrayList<Alumno> alumnos = asignatura.getAlumnos();
 		this.nota = asignatura.nota();
@@ -33,7 +32,7 @@ public class Greedy {
 		Collections.sort(libros);
 
 //		asignatura.imprimirAlumnos("estado inicial de alumnos");
-		Solucion solucion = this.asignarLibros(alumnos, libros);
+		Estado solucion = this.asignarLibros(alumnos, libros);
 
 		return solucion;
 	}
@@ -47,12 +46,12 @@ public class Greedy {
 	 * @param alumnos        : lista de alumnos
 	 * @param libros         : lista de libros
 	 */
-	private Solucion asignarLibros(ArrayList<Alumno> alumnos, ArrayList<Libro> libros) {
+	private Estado asignarLibros(ArrayList<Alumno> alumnos, ArrayList<Libro> libros) {
 		int indiceL = 0;
 		int indiceA = 0;
 		int alumnosAprobados = 0;
 
-		Solucion solucion = new Solucion();
+		Estado solucion = new Estado();
 
 		while (indiceA != -1 && indiceL != -1 ) {
 
@@ -70,13 +69,8 @@ public class Greedy {
 						// asignar libro al alumno
 						Libro libro = libros.get(indiceL);
 						alumno.leer(libro.clone());
-
-						libro.restarEjemplar();
-						if (!libro.tieneEjemplares()) {
-							libros.remove(indiceL);
-						}
+						libro.restarEjemplar();			
 					}
-
 				}
 				solucion.add(alumno);
 				if (alumno.puntaje() >= this.nota) {
@@ -89,9 +83,9 @@ public class Greedy {
 				indiceA++;
 			}
 		}
-		solucion.setIteraciones(cA + cL);
-		cA = 0;
-		cL = 0;
+		solucion.setIteraciones(c);
+		c = 0;
+
 		return solucion;
 	}
 
@@ -108,7 +102,6 @@ public class Greedy {
 		}
 		boolean find = false;
 		while (indice < alumnos.size() && !find) {
-			cA++;
 			find = alumnos.get(indice).puntaje() < this.nota;
 			if (!find) {
 				indice++;
@@ -136,7 +129,7 @@ public class Greedy {
 		int ultimoPosible = -1;
 		int primeroPosible = -1;
 		while (indice < libros.size() && sum > this.nota) {
-			cL++;
+			c++;
 
 			// se puede pensar esta comprobacion como el factible()
 			if (alumno.puedeLeer(libros.get(indice)) && libros.get(indice).tieneEjemplares()) {

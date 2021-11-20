@@ -2,14 +2,14 @@ package ejercicioEntregable.modelo;
 
 import java.util.*;
 
-public class Solucion {
+public class Estado {
 
 	private HashSet<Alumno> alumnos;
 	private int aprobados;
 	private int iteraciones;
 	private boolean fin;
 
-	public Solucion() {
+	public Estado() {
 		alumnos = new HashSet<>();
 		aprobados = 0;
 		iteraciones = 0;
@@ -33,7 +33,7 @@ public class Solucion {
 	}
 
 	public void remove(Alumno alumno) {
-		alumnos.remove(alumno);
+		this.alumnos.remove(alumno);
 	}
 
 	public void setIteraciones(int c) {
@@ -41,27 +41,29 @@ public class Solucion {
 	}
 
 	public String toString() {
-		String info = "Libros Entregados\n\n";
+		String info = "";
 		for (Alumno a : alumnos) {
-			if (!a.librosLeidos().equals("empty")) {
-				info += a + "\nLibros: ";
-				info += a.librosLeidos() + "\n\n";
-			}
+			info += a + "\nLibros: ";
+			info += a.librosLeidos() + "\n\n";
 		}
 		info += "N° de iteraciones: " + iteraciones + "\n";
 		info += "Alumnos aprobados: " + aprobados;
 		return info;
 	}
 
-	public Solucion clone() {
-		Solucion copy = new Solucion();
+	public Estado clone() {
+		Estado copy = new Estado();
 		for (Alumno a : alumnos) {
 			copy.add(a.clone());
-		}
+		}	
 		copy.setAprobados(this.aprobados);
+		copy.setIteraciones(iteraciones);
+		if (this.esFinal()) {
+			copy.fin();
+		}
 		return copy;
 	}
-	
+
 	public void fin() {
 		this.fin = true;
 	}
@@ -70,9 +72,12 @@ public class Solucion {
 		return this.fin;
 	}
 
-//	public boolean encontrada() {
-//		
-//		return aprobados.;
-//	}
+	public void noEsFinal() {
+		this.fin = false;
+	}
+
+	public boolean isEmpty() {
+		return this.alumnos.isEmpty();
+	}
 
 }

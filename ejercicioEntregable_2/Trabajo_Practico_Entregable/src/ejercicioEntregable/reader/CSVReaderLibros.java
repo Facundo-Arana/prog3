@@ -17,6 +17,7 @@ public class CSVReaderLibros {
 	}
 
 	public ArrayList<Libro> read() {
+//		int c = 0;
 		ArrayList<String[]> lines = this.readContent();
 		ArrayList<Libro> libros = new ArrayList<Libro>();
 		for (String[] line : lines) {
@@ -27,11 +28,11 @@ public class CSVReaderLibros {
 			Integer paginas = Integer.parseInt(line[4].trim());
 			Integer puntaje = Integer.parseInt(line[5].trim());
 			Integer cantidadEjemplares = Integer.parseInt(line[6].trim());
-
+//			c+= cantidadEjemplares;
 			Libro l = new Libro(idLibro, titulo, autor, genero, paginas, puntaje, cantidadEjemplares);
 			libros.add(l);
 		}
-
+//		System.out.println(c);
 		return libros;
 	}
 

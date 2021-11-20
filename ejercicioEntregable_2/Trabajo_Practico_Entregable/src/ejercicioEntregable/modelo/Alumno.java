@@ -61,7 +61,7 @@ public class Alumno implements Comparable<Alumno> {
 	}
 	
 	public boolean estaAprobado(float nota) {	
-		return puntaje >= nota;
+		return puntaje >= (int) nota;
 	}
 	
 	@Override

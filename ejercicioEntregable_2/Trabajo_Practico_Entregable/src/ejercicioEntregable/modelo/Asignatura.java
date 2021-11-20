@@ -29,6 +29,10 @@ public class Asignatura {
 	public float nota() {
 		return nota;
 	}
+	
+	public void setNota(float n) {
+		this.nota = n;
+	}
 
 	/**
 	 * @print
